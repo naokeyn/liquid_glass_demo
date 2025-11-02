@@ -27,6 +27,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final int minAlpha = 0x00;
+  final int maxAlpha = 0xFF;
+
+  int _currentSliderValue = 0x33;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,20 +47,40 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           // The LiquidGlassLayer manages glass rendering
           Center(
-            child: LiquidGlassLayer(
-              settings: const LiquidGlassSettings(
-                thickness: 20,
-                blur: 10,
-                glassColor: Color(0x33FFFFFF),
-              ),
-              child: LiquidGlass(
-                shape: LiquidRoundedSuperellipse(borderRadius: 50),
-                child: const SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Center(child: FlutterLogo(size: 100)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LiquidGlassLayer(
+                  settings: LiquidGlassSettings(
+                    thickness: 20,
+                    blur: 10,
+                    glassColor: Color(_currentSliderValue << 24 | 0xFFFFFF),
+                  ),
+                  child: LiquidGlass(
+                    shape: LiquidRoundedSuperellipse(borderRadius: 50),
+                    child: const SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Center(child: FlutterLogo(size: 100)),
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 40),
+                Slider(
+                  value: _currentSliderValue.toDouble(),
+                  onChanged: (value) {
+                    setState(() {
+                      _currentSliderValue = value.toInt();
+                    });
+                  },
+                  min: minAlpha.toDouble(),
+                  max: maxAlpha.toDouble(),
+                ),
+                Text(
+                  'Alpha: 0x${_currentSliderValue.toRadixString(16).padLeft(2, '0').toUpperCase()}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
             ),
           ),
         ],
