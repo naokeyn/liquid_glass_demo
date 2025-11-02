@@ -1,7 +1,6 @@
 import 'package:app/control_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 void main() {
