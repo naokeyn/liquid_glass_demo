@@ -11,6 +11,9 @@ class ControlPanel extends ConsumerStatefulWidget {
 }
 
 class _ControlPanelState extends ConsumerState<ControlPanel> {
+  static const int minAlpha = 0x00;
+  static const int maxAlpha = 0xFF;
+
   int sliderValue = 0x33;
 
   @override
@@ -30,8 +33,8 @@ class _ControlPanelState extends ConsumerState<ControlPanel> {
             children: [
               Text("Alpha", style: Theme.of(context).textTheme.titleMedium),
               Slider(
-                min: 0x00,
-                max: 0xFF,
+                min: minAlpha.toDouble(),
+                max: maxAlpha.toDouble(),
                 value: sliderValue.toDouble(),
                 divisions: 0xFF,
                 label:
