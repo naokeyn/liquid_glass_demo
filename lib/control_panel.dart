@@ -24,17 +24,25 @@ class _ControlPanelState extends ConsumerState<ControlPanel> {
         controller: widget.scrollController,
         shrinkWrap: true,
         children: [
-          Slider(
-            min: 0x00,
-            max: 0xFF,
-            value: sliderValue.toDouble(),
-            divisions: 0xFF,
-            label: 'Alpha: 0x${sliderValue.toRadixString(16).toUpperCase().padLeft(2, '0')}',
-            onChanged:
-                (value) => {
-                  sliderValue = value.toInt(),
-                  ref.read(alphaProvider.notifier).state = sliderValue,
-                },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Alpha", style: Theme.of(context).textTheme.titleMedium),
+              Slider(
+                min: 0x00,
+                max: 0xFF,
+                value: sliderValue.toDouble(),
+                divisions: 0xFF,
+                label:
+                    '0x${sliderValue.toRadixString(16).toUpperCase().padLeft(2, '0')}',
+                onChanged:
+                    (value) => {
+                      sliderValue = value.toInt(),
+                      ref.read(alphaProvider.notifier).state = sliderValue,
+                    },
+              ),
+            ],
           ),
         ],
       ),
