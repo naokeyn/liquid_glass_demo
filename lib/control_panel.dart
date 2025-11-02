@@ -37,8 +37,10 @@ class _ControlPanelState extends ConsumerState<ControlPanel> {
                 label:
                     '0x${sliderValue.toRadixString(16).toUpperCase().padLeft(2, '0')}',
                 onChanged: (value) {
-                  sliderValue = value.toInt();
-                  ref.read(alphaProvider.notifier).state = sliderValue;
+                  setState(() {
+                    sliderValue = value.toInt();
+                  });
+                  ref.read(alphaProvider.notifier).setAlpha(sliderValue);
                 },
               ),
             ],

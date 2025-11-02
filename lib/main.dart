@@ -7,7 +7,18 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-final alphaProvider = StateProvider<int>((ref) => 0x33);
+final alphaProvider = NotifierProvider<AlphaNotifier, int>(AlphaNotifier.new);
+
+class AlphaNotifier extends Notifier<int> {
+  @override
+  int build() {
+    return 0x33;
+  }
+
+  void setAlpha(int alpha) {
+    state = alpha;
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
